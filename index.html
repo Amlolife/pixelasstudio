@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixelas Studio - Software Editing Gambar AI Profesional</title>
+    <meta name="description" content="Software editing gambar profesional berbasis AI untuk Windows. Buat gambar dengan AI, hapus background otomatis, dan edit dengan presisi menggunakan Nano Banana, Flux Kontext, Seedream 4, dan Qwen Edit.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #0c0c0c;
+            color: #E0E0E0;
+            background-image: 
+                radial-gradient(ellipse at 10% 90%, rgba(120, 119, 198, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 20%, rgba(120, 119, 198, 0.08) 0%, transparent 50%);
+            font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .buy-button:disabled { background: #4b5563; cursor: not-allowed; transform: scale(1); box-shadow: none; }
+        .status { margin-top: 1rem; padding: 0.75rem 1rem; border-radius: 0.5rem; text-align: center; font-weight: 600; opacity: 0; transition: opacity 0.3s ease; }
+        .status.visible { opacity: 1; }
+        .status.success { background-color: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .status.error { background-color: rgba(239, 68, 68, 0.1); color: #ef4444; }
+        .status.loading { background-color: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+    
+    <main class="w-full max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 xl:gap-12">
+            
+            <div class="lg:col-span-2 w-full space-y-8">
+                
+                <!-- Hero Section -->
+                <div class="aspect-video bg-[#171717] border border-zinc-800 rounded-2xl overflow-hidden">
+                    <img src="assets/hero-screenshot.png" alt="Pixelas Studio Interface" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="w-full h-full object-cover">
+                    <div class="hero-placeholder w-full h-full bg-[#171717] border-2 border-dashed border-zinc-700 rounded-2xl flex items-center justify-center flex-col text-center" style="display: none;">
+                        <div class="text-6xl mb-4">🎨</div>
+                        <p class="text-xl mb-2">Software Screenshot</p>
+                        <small class="text-gray-400">Add your hero image to assets/hero-screenshot.png</small>
+                    </div>
+                </div>
+
+                <div class="pb-6 border-b border-zinc-800">
+                    <h2 class="text-3xl font-bold text-white">Pixelas Studio - Software Editing Gambar AI Profesional</h2>
+                    <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mt-3 text-gray-400">
+                        <div class="px-3 py-1 bg-purple-500/10 border border-purple-400/20 rounded-md text-purple-300 font-bold text-sm">IDR 50.000</div>
+                        <span>oleh <span class="font-semibold text-gray-300">Pixelas Studio</span></span>
+                        <div class="flex items-center">
+                            <span class="text-purple-400">★★★★★</span>
+                            <span class="ml-2 text-sm">5.0 (25+ penilaian)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6 text-gray-300 text-lg leading-relaxed">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Revolusi Alur Kerja Kreatif Anda</h3>
+                        <p>Pixelas Studio adalah software editing gambar profesional yang mengintegrasikan model AI terdepan langsung ke dalam alur kerja kreatif Anda. Ciptakan visual yang memukau dengan AI generation, hapus background otomatis, dan edit dengan presisi menggunakan <strong>Nano Banana</strong>, <strong>Flux Kontext</strong>, <strong>Seedream 4</strong>, dan <strong>Qwen Edit</strong>.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Tidak Pernah Semudah Ini</h3>
+                        <p>Pilih gambar Anda, pilih model AI, dan biarkan Pixelas Studio melakukan sisanya. Software ini sepenuhnya portable - tidak perlu instalasi. Sempurna untuk content creator, online seller, desainer, dan usaha kecil menengah.</p>
+                    </div>
+                </div>
+
+                <!-- AI Models Showcase -->
+                <div class="bg-[#171717] border border-zinc-800 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold text-white mb-6">Didukung oleh Model AI Terdepan</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-[#1a1a1a] border border-zinc-700 rounded-xl p-4 text-center">
+                            <div class="text-3xl mb-2">🍌</div>
+                            <h4 class="font-semibold text-white mb-1">Nano Banana</h4>
+                            <p class="text-sm text-gray-400">Proses AI ultra-cepat untuk peningkatan gambar real-time</p>
+                        </div>
+                        <div class="bg-[#1a1a1a] border border-zinc-700 rounded-xl p-4 text-center">
+                            <div class="text-3xl mb-2">🌊</div>
+                            <h4 class="font-semibold text-white mb-1">Flux Kontext</h4>
+                            <p class="text-sm text-gray-400">AI yang memahami konteks dan visi kreatif Anda</p>
+                        </div>
+                        <div class="bg-[#1a1a1a] border border-zinc-700 rounded-xl p-4 text-center">
+                            <div class="text-3xl mb-2">🌟</div>
+                            <h4 class="font-semibold text-white mb-1">Seedream 4</h4>
+                            <p class="text-sm text-gray-400">Transformasi dream-like dan efek surealis canggih</p>
+                        </div>
+                        <div class="bg-[#1a1a1a] border border-zinc-700 rounded-xl p-4 text-center">
+                            <div class="text-3xl mb-2">⚡</div>
+                            <h4 class="font-semibold text-white mb-1">Qwen Edit</h4>
+                            <p class="text-sm text-gray-400">Editing presisi dengan pengenalan objek cerdas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Section -->
+                <div class="bg-[#171717] border border-zinc-800 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold text-white mb-6">Fitur Profesional</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="text-2xl">🎨</div>
+                                <div>
+                                    <h4 class="font-semibold text-white">AI Image Generation</h4>
+                                    <p class="text-sm text-gray-400">Buat gambar menakjubkan dari deskripsi teks</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="text-2xl">✂️</div>
+                                <div>
+                                    <h4 class="font-semibold text-white">AI Background Removal</h4>
+                                    <p class="text-sm text-gray-400">Hapus background otomatis dengan presisi AI</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="text-2xl">💾</div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Multiple Export Formats</h4>
+                                    <p class="text-sm text-gray-400">Export ke PNG, JPG dengan kualitas tinggi</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="text-2xl">🚀</div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Software Portable</h4>
+                                    <p class="text-sm text-gray-400">Tidak perlu instalasi - cukup extract dan jalankan</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="text-2xl">🌐</div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Dukungan Multi-Bahasa</h4>
+                                    <p class="text-sm text-gray-400">Dukungan Bahasa Indonesia lengkap</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="text-2xl">💼</div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Lisensi Komersial</h4>
+                                    <p class="text-sm text-gray-400">Gunakan untuk proyek komersial dan klien</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Requirements -->
+                <div class="bg-[#171717] border border-zinc-800 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold text-white mb-6">Persyaratan Sistem</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-300">
+                        <div>
+                            <h4 class="font-semibold text-white mb-2">Persyaratan Minimum:</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• Windows 10/11 (64-bit SAJA)</li>
+                                <li>• RAM: 4GB minimum (8GB direkomendasikan)</li>
+                                <li>• Storage: 500MB ruang kosong</li>
+                                <li>• Processor: Intel i3/AMD Ryzen 3 atau lebih tinggi</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white mb-2">Persyaratan Tambahan:</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• Koneksi internet untuk fitur AI</li>
+                                <li>• Akun Replicate.com untuk akses API</li>
+                                <li>• $5-10 kredit untuk pemrosesan AI</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="bg-[#171717] border border-zinc-800 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold text-white mb-6">Pertanyaan yang Sering Diajukan</h3>
+                    <div class="space-y-4">
+                        <div class="border-b border-zinc-700 pb-4">
+                            <h4 class="font-semibold text-white mb-2">Bagaimana cara kerja sistem token API?</h4>
+                            <p class="text-sm text-gray-400">Pixelas Studio menggunakan API Replicate untuk fitur AI. Anda perlu mendaftar akun gratis di Replicate.com, membeli kredit ($5-10 ≈ IDR 80-160k), dan memasukkan API key Anda. Kredit $5 biasanya cukup untuk 2-3 bulan untuk pengguna casual.</p>
+                        </div>
+                        <div class="border-b border-zinc-700 pb-4">
+                            <h4 class="font-semibold text-white mb-2">Apakah software ini portable?</h4>
+                            <p class="text-sm text-gray-400">Ya! Pixelas Studio sepenuhnya portable (file 128 MB). Tidak perlu instalasi - cukup extract file ZIP dan double-click Pixelas Studio.exe untuk menjalankan.</p>
+                        </div>
+                        <div class="border-b border-zinc-700 pb-4">
+                            <h4 class="font-semibold text-white mb-2">Bisakah digunakan untuk proyek komersial?</h4>
+                            <p class="text-sm text-gray-400">Ya, pembelian Anda mencakup lisensi komersial yang memungkinkan Anda menggunakan Pixelas Studio untuk pekerjaan klien, proyek komersial, dan tujuan bisnis.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white mb-2">Bagaimana cara mendapat dukungan?</h4>
+                            <p class="text-sm text-gray-400">Dukungan tersedia melalui Instagram DM di @amlolife. Kami memberikan bantuan untuk setup, konfigurasi API, dan masalah teknis yang mungkin Anda hadapi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Purchase Card (Sticky) -->
+            <div class="lg:col-span-1 w-full mt-8 lg:mt-0">
+                <div class="bg-[#171717] border border-zinc-800 rounded-2xl p-6 lg:sticky lg:top-8 space-y-6">
+                    <div class="text-4xl font-bold text-white tracking-tight mb-5">IDR 50.000</div>
+                    
+                    <div class="p-4 border border-zinc-700 rounded-lg space-y-2 text-gray-300 text-sm">
+                        <p class="font-semibold">Yang termasuk:</p>
+                        <ul class="list-disc list-inside text-gray-400">
+                            <li>Software portable (128 MB) - Tidak perlu instalasi</li>
+                            <li>AI Image Generation & Background Removal</li>
+                            <li>Export ke format PNG, JPG</li>
+                            <li>Dukungan Bahasa Indonesia lengkap</li>
+                            <li>Lisensi komersial termasuk</li>
+                            <li>Dukungan via Instagram @amlolife</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-yellow-500/10 border border-yellow-400/20 rounded-lg p-4">
+                        <h4 class="font-semibold text-yellow-300 mb-2">⚠️ PENTING: Sistem Token API</h4>
+                        <p class="text-sm text-gray-300 mb-2">Fitur AI memerlukan kredit API Replicate (biaya tambahan):</p>
+                        <ul class="text-xs text-gray-400 space-y-1">
+                            <li>• Daftar akun gratis di Replicate.com</li>
+                            <li>• Beli kredit: $5-10 (≈IDR 80-160k)</li>
+                            <li>• Kredit $5 = 2-3 bulan untuk pengguna casual</li>
+                            <li>• Panduan setup lengkap termasuk!</li>
+                        </ul>
+                    </div>
+
+                    <a href="https://lynk.id/pixelas.cloud/mq7on743wrqq" target="_blank" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold py-3.5 rounded-lg text-lg hover:from-purple-700 hover:to-blue-700 transition-transform transform hover:scale-105 shadow-lg shadow-purple-600/20 text-center block">
+                        Beli Sekarang - IDR 50.000
+                    </a>
+
+                    <div class="text-center text-sm text-purple-300 font-semibold">
+                        <a href="#">Produk digital • Tidak ada refund setelah download</a>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-3">Penilaian</h3>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-purple-400">★★★★★</span>
+                            <span class="font-bold">5</span>
+                            <div class="w-full bg-zinc-700 rounded-full h-1.5">
+                                <div class="bg-purple-500 h-1.5 rounded-full" style="width: 100%"></div>
+                            </div>
+                            <span class="text-gray-400 text-sm">100%</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-zinc-800 space-y-6">
+                        <div class="text-sm">
+                            <p class="text-purple-400">★★★★★</p>
+                            <p class="text-gray-300 my-2">"Software ini benar-benar game changer... mudah digunakan, dan hasilnya luar biasa. Wajib punya!"</p>
+                            <p class="font-semibold text-gray-400">- Budi S.</p>
+                        </div>
+                        <div class="text-sm">
+                            <p class="text-purple-400">★★★★★</p>
+                            <p class="text-gray-300 my-2">"Salah satu software editing terbaik yang pernah saya gunakan. Sangat mempercepat proses kreatif."</p>
+                            <p class="font-semibold text-gray-400">- Anita W.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-16 pt-8 border-t border-zinc-800 text-center text-gray-400 text-sm">
+        <p>&copy; 2024 Pixelas Studio. Semua hak dilindungi.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMLOGEN AI for Photoshop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #0c0c0c;
+            color: #E0E0E0;
+            background-image: 
+                radial-gradient(ellipse at 10% 90%, rgba(120, 119, 198, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 20%, rgba(120, 119, 198, 0.08) 0%, transparent 50%);
+            font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+        }
+        .input-field { transition: all 0.2s ease-in-out; }
+        .buy-button:disabled { background: #4b5563; cursor: not-allowed; transform: scale(1); box-shadow: none; }
+        .status { margin-top: 1rem; padding: 0.75rem 1rem; border-radius: 0.5rem; text-align: center; font-weight: 600; opacity: 0; transition: opacity 0.3s ease; }
+        .status.visible { opacity: 1; }
+        .status.success { background-color: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .status.error { background-color: rgba(239, 68, 68, 0.1); color: #ef4444; }
+        .status.loading { background-color: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        
+        /* Slideshow Styles */
+        .media-tab {
+            cursor: pointer; padding: 8px 16px; border: 1px solid #404040;
+            border-radius: 9999px; background-color: transparent; color: #a1a1aa;
+            transition: all 0.2s ease-in-out;
+        }
+        .media-tab:hover { background-color: #27272a; color: #e4e4e7; }
+        .media-tab.active {
+            background-color: #e4e4e7; color: #18181b; font-weight: 600; border-color: #e4e4e7;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+    
+    <main class="w-full max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 xl:gap-12">
+            
+            <div class="lg:col-span-2 w-full space-y-8">
+                
+                <!-- SLIDESHOW CONTAINER -->
+                <div>
+                    <div class="aspect-video bg-[#171717] border border-zinc-800 rounded-2xl overflow-hidden">
+                        <img id="slideshow-image" src="https://via.placeholder.com/1280x720.png/171717/FFFFFF?text=Your+Product+Image" alt="Product Showcase" class="w-full h-full object-cover">
+                        <div id="slideshow-video" class="video-container hidden">
+                            <iframe src="https://www.youtube.com/embed/Clg_3_h_EaE?si=uI3M2E5x2qJ0hE_f" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="flex justify-center items-center space-x-4 mt-4">
+                        <button id="show-image-btn" class="media-tab active">Image</button>
+                        <button id="show-video-btn" class="media-tab">Video</button>
+                    </div>
+                </div>
+                <!-- END SLIDESHOW CONTAINER -->
+
+                <div class="pb-6 border-b border-zinc-800">
+                    <h2 class="text-3xl font-bold text-white">AMLOGEN AI - Generative AI Photoshop Plugin</h2>
+                    <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mt-3 text-gray-400">
+                        <div class="px-3 py-1 bg-purple-500/10 border border-purple-400/20 rounded-md text-purple-300 font-bold text-sm">Rp 150.000</div>
+                        <span>by <a href="#" class="font-semibold text-gray-300 hover:text-white">Amlogen Labs</a></span>
+                        <div class="flex items-center">
+                            <span class="text-purple-400">★★★★★</span>
+                            <span class="ml-2 text-sm">5.0 (25+ ratings)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6 text-gray-300 text-lg leading-relaxed">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Revolusi Alur Kerja Kreatif Anda</h3>
+                        <p>Amlogen AI adalah plugin Photoshop pertama di dunia yang dirancang untuk mengintegrasikan kekuatan AI generatif langsung ke dalam alur kerja Anda. Ciptakan visual yang memukau, edit dengan presisi, dan jelajahi kemungkinan tak terbatas tanpa pernah meninggalkan Photoshop.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Tidak Pernah Semudah Ini</h3>
+                        <p>Pilih layer, tulis prompt, dan biarkan Amlogen AI melakukan sisanya. Hasilnya dibuat dalam Smart Object, memastikan alur kerja Anda tetap non-destruktif. Anda selalu dapat kembali dan mengedit konten asli.</p>
+                    </div>
+                </div>
+
+                <!-- PAIR 1: GIF/IMAGE + DESCRIPTION -->
+                <div class="bg-[#171717] border border-zinc-800 rounded-2xl overflow-hidden">
+                    <img src="https://via.placeholder.com/1280x720.png/171717/FFFFFF?text=Your+GIF+or+Image+Here" alt="Feature showcase GIF" class="w-full h-full object-cover">
+                </div>
+                <div class="bg-[#171717] border border-zinc-800 rounded-2xl p-8 space-y-4 text-gray-300 leading-relaxed">
+                    <h3 class="text-2xl font-bold text-white">Judul Deskripsi Anda di Sini</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+                <!-- END PAIR 1 -->
+
+                <!-- PAIR 2: GIF/IMAGE + DESCRIPTION -->
+                <div class="bg-[#171717] border border-zinc-800 rounded-2xl overflow-hidden">
+                    <img src="https://via.placeholder.com/1280x720.png/171717/FFFFFF?text=Another+GIF+or+Image" alt="Another feature showcase" class="w-full h-full object-cover">
+                </div>
+                <div class="bg-[#171717] border border-zinc-800 rounded-2xl p-8 space-y-4 text-gray-300 leading-relaxed">
+                     <h3 class="text-2xl font-bold text-white">Fitur Unggulan Lainnya</h3>
+                     <p>Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula.</p>
+                </div>
+                <!-- END PAIR 2 -->
+
+                <div class="pt-8 space-y-6 text-gray-300 border-t border-zinc-800">
+                    <h3 class="text-xl font-bold text-white">This Product Comes With:</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-400">
+                        <li>1 .CCX Plugin File (for Photoshop CC 2022+)</li>
+                        <li>1 User Manual .PDF File</li>
+                        <li>50 Premium Generation Tokens</li>
+                        <li>Free Updates + Customer Support</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Column: Action Card (Sticky) -->
+            <div class="lg:col-span-1 w-full mt-8 lg:mt-0">
+                <div class="bg-[#171717] border border-zinc-800 rounded-2xl p-6 lg:sticky lg:top-8 space-y-6">
+                    <form id="purchase-form" onsubmit="event.preventDefault(); initiatePayment();">
+                        <div class="text-4xl font-bold text-white tracking-tight mb-5">Rp 150.000</div>
+                        <div class="space-y-3">
+                            <input type="email" id="email" placeholder="Alamat Email" required class="input-field w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none">
+                            <input type="text" id="name" placeholder="Nama Lengkap" required class="input-field w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none">
+                        </div>
+                        <div class="pt-4">
+                            <button type="submit" class="buy-button w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold py-3.5 rounded-lg text-lg hover:from-purple-700 hover:to-blue-700 transition-transform transform hover:scale-105 shadow-lg shadow-purple-600/20">
+                                Saya Mau Ini!
+                            </button>
+                        </div>
+                        <div id="status" class="status"></div>
+                    </form>
+
+                    <div class="p-4 border border-zinc-700 rounded-lg space-y-2 text-gray-300 text-sm">
+                        <p class="font-semibold">Termasuk di dalamnya:</p>
+                        <ul class="list-disc list-inside text-gray-400">
+                            <li>File plugin .CCX (Photoshop 2022+)</li>
+                            <li>Manual & Panduan Instalasi PDF</li>
+                            <li>50 Token Premium</li>
+                            <li>Lisensi Seumur Hidup & Update Gratis</li>
+                            <li>Dukungan Pelanggan Prioritas</li>
+                        </ul>
+                    </div>
+
+                    <div class="text-center text-sm text-purple-300 font-semibold"><a href="#">Garansi 100% Uang Kembali</a></div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-3">Ratings</h3>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-purple-400">★★★★★</span>
+                            <span class="font-bold">5</span>
+                            <div class="w-full bg-zinc-700 rounded-full h-1.5"><div class="bg-purple-500 h-1.5 rounded-full" style="width: 100%"></div></div>
+                            <span class="text-gray-400 text-sm">100%</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-zinc-800 space-y-6">
+                        <div class="text-sm">
+                            <p class="text-purple-400">★★★★★</p>
+                            <p class="text-gray-300 my-2">"Plugin ini benar-benar game changer... mudah diinstal, mudah digunakan, dan hasilnya luar biasa. Wajib punya!"</p>
+                            <p class="font-semibold text-gray-400">- Budi S.</p>
+                        </div>
+                        <div class="text-sm">
+                            <p class="text-purple-400">★★★★★</p>
+                            <p class="text-gray-300 my-2">"Salah satu plugin Photoshop terbaik yang pernah saya gunakan. Sangat mempercepat proses ideasi dan iterasi desain."</p>
+                            <p class="font-semibold text-gray-400">- Anita W.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // --- Slideshow Logic ---
+        const imageContainer = document.getElementById('slideshow-image');
+        const videoContainer = document.getElementById('slideshow-video');
+        const showImageBtn = document.getElementById('show-image-btn');
+        const showVideoBtn = document.getElementById('show-video-btn');
+        showImageBtn.addEventListener('click', () => {
+            imageContainer.classList.remove('hidden'); videoContainer.classList.add('hidden');
+            showImageBtn.classList.add('active'); showVideoBtn.classList.remove('active');
+        });
+        showVideoBtn.addEventListener('click', () => {
+            videoContainer.classList.remove('hidden'); imageContainer.classList.add('hidden');
+            showVideoBtn.classList.add('active'); showImageBtn.classList.remove('active');
+        });
+        // --- Payment Logic (unchanged) ---
+        const buyButton = document.querySelector('.buy-button');
+        const emailInput = document.getElementById('email');
+        const nameInput = document.getElementById('name');
+        const statusEl = document.getElementById('status');
+        async function initiatePayment() {
+            const email = emailInput.value; const name = nameInput.value;
+            if (!email || !name) { showStatus('Harap isi alamat email dan nama', 'error'); return; }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showStatus('Harap masukkan alamat email yang valid', 'error'); return; }
+            buyButton.disabled = true; buyButton.innerHTML = 'Memproses...'; showStatus('Membuat tautan pembayaran yang aman...', 'loading');
+            try {
+                const response = await fetch('https://us-central1-amlogen-ai-backend.cloudfunctions.net/createScalevOrder', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ customerEmail: email, customerName: name }) });
+                if (!response.ok) { const errorData = await response.json().catch(() => ({ error: 'Terjadi kesalahan tidak dikenal' })); throw new Error(errorData.error || `HTTP error! status: ${response.status}`); }
+                const result = await response.json();
+                if (result.success) { showStatus('Tautan pembayaran dibuat! Mengalihkan...', 'success'); setTimeout(() => { window.location.href = result.data.payment_url; }, 1500); } else { throw new Error(result.error || 'Gagal membuat pembayaran'); }
+            } catch (error) { console.error('Payment error:', error); showStatus(`Gagal: ${error.message}`, 'error'); buyButton.disabled = false; buyButton.innerHTML = 'Saya Mau Ini!'; }
+        }
+        function showStatus(message, type) { statusEl.textContent = message; statusEl.className = `status ${type} visible`; if (type === 'error') { setTimeout(() => { statusEl.classList.remove('visible'); }, 5000); } }
+    </script>
+</body>
+</html>
