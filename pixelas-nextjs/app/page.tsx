@@ -14,29 +14,64 @@ export default function Home() {
   const [products, setProducts] = useState<any[]>([]);
   const [apiLoaded, setApiLoaded] = useState(false);
 
-  // Load products from API first, no fallbacks
+  // Load products from synced localStorage and listen for updates
   useEffect(() => {
-    const loadProductsFromAPI = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch('/api/products');
-        if (response.ok) {
-          const data = await response.json();
-          setProducts(data.products);
+    const loadProducts = () => {
+      // First try synced admin data
+      const syncedProducts = localStorage.getItem('admin-products-sync');
+      if (syncedProducts) {
+        try {
+          const syncData = JSON.parse(syncedProducts);
+          setProducts(syncData.products);
           setApiLoaded(true);
-        } else {
-          console.error('API returned error:', response.status);
-          // Keep loading state if API fails
+          setIsLoading(false);
+          return;
+        } catch (error) {
+          console.error('Error parsing synced products:', error);
         }
-      } catch (error) {
-        console.error('Error loading products from API:', error);
-        // Keep loading state if API fails
-      } finally {
-        setIsLoading(false);
+      }
+
+      // Fallback to regular localStorage
+      const savedProducts = localStorage.getItem('admin-products');
+      if (savedProducts) {
+        try {
+          setProducts(JSON.parse(savedProducts));
+          setApiLoaded(true);
+          setIsLoading(false);
+          return;
+        } catch (error) {
+          console.error('Error parsing saved products:', error);
+        }
+      }
+
+      // Final fallback to static data
+      setProducts(allProducts);
+      setApiLoaded(true);
+      setIsLoading(false);
+    };
+
+    // Listen for localStorage changes from admin panel
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'admin-products-sync' && e.newValue) {
+        try {
+          const syncData = JSON.parse(e.newValue);
+          setProducts(syncData.products);
+          console.log('Main page updated with admin changes');
+        } catch (error) {
+          console.error('Error parsing admin sync data:', error);
+        }
       }
     };
 
-    loadProductsFromAPI();
+    // Load initial products
+    loadProducts();
+
+    // Listen for admin updates
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   // Prevent body scroll when modal is open
